@@ -4,6 +4,9 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
+permissions: write-all
+
 jobs:
   test:
     timeout-minutes: 60
