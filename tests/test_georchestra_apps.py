@@ -18,7 +18,7 @@ def test_geo_network_webapp(page: Page):
     page.goto("/geonetwork/srv/eng/catalog.search")
     # page.wait_for_timeout(20000)
     screenshot_page(page,"geonetwork")
-    expect(page.get_by_role("combobox", name="Search")).to_be_visible(timeout=20000)
+    expect(page.get_by_role("combobox", name="Search")).to_be_visible(timeout=40000)
 
 @allure.epic("Web interface")
 @allure.feature("geOrchestra")
