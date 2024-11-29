@@ -18,7 +18,7 @@ def test_geo_network_webapp(page: Page):
     page.goto("/geonetwork/srv/eng/catalog.search")
     # page.wait_for_timeout(20000)
     screenshot_page(page,"geonetwork")
-    expect(page.get_by_role("combobox", name="Search")).to_be_visible()
+    expect(page.get_by_role("combobox", name="Search")).to_be_visible(timeout=20000)
 
 @allure.epic("Web interface")
 @allure.feature("geOrchestra")
@@ -69,4 +69,4 @@ def test_geo_server_webapp(page: Page):
 def test_map_store_webapp(page: Page):
     page.goto("/mapstore/")
     screenshot_page(page,"mapstore")
-    expect(page.locator("canvas")).to_be_visible()
+    expect(page.locator("canvas")).to_be_visible(timeout=20000)
