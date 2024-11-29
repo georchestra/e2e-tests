@@ -1,0 +1,3 @@
+local.account:
+  username: 'testadmin'
+  password: 'testadmin'

@@ -41,6 +41,9 @@ jobs:
           cd docker
           docker compose up -d --wait --quiet-pull
           cd ..
+          echo "Trigger GN wro4j..."
+          curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
+        
 
       - name: Caddy trust
         run: |
