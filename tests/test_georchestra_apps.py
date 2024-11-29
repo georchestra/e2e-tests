@@ -5,7 +5,7 @@ from playwright.sync_api import Page, expect
 
 from common import screenshot_page
 
-BASE_URL="https://demo.georchestra.org"
+BASE_URL="https://georchestra-127-0-0-1.nip.io"
 LOCAL_ACCOUNT_USERNAME=os.getenv("LOCAL_ACCOUNT_USERNAME")
 LOCAL_ACCOUNT_PASSWORD=os.getenv("LOCAL_ACCOUNT_PASSWORD")
 
@@ -23,14 +23,6 @@ def login(page: Page, cas: bool = False):
     password_input.fill(LOCAL_ACCOUNT_PASSWORD)
     password_input.press("Enter")
 
-def login_case(page: Page):
-    page.goto(f"{BASE_URL}/datahub/")
-    page.get_by_role("link", name="login").click()
-    page.get_by_placeholder("Username").fill(username)
-    page.get_by_placeholder("Username").press("Tab")
-    page.get_by_placeholder("Password").fill(password)
-    page.get_by_placeholder("Password").press("Enter")
-
 @allure.epic("Web interface")
 @allure.feature("geOrchestra")
 @allure.story("GeoNetwork")
@@ -38,6 +30,7 @@ def login_case(page: Page):
 @allure.title("Test the GeoNetwork webapp")
 def test_geo_network_webapp(page: Page):
     page.goto(f"{BASE_URL}/geonetwork/srv/eng/catalog.search")
+    page.wait_for_timeout(20000)
     screenshot_page(page,"geonetwork")
     expect(page.get_by_role("combobox", name="Search")).to_be_visible()
 
@@ -124,5 +117,5 @@ def test_mapstore_add_refer_sols_layer(page: Page):
     page.get_by_placeholder("text to search...").fill("arrondissement")
     page.get_by_placeholder("text to search...").press("Enter")
     page.locator("#mapstore-metadata-explorer .catalog-results").get_by_role("button").click()
-    screenshot_page(page, "mapstore-refresols")
+    screenshot_page(page, "mapstore")
     expect(page.locator("#mapstore-layers").get_by_text("test")).to_be_visible()

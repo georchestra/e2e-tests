@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: tests
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -17,11 +19,28 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r tests/requirements.txt
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
+      - name: Checkout geOrchestra/docker
+        uses: actions/checkout@v4
+        with:
+          repository: georchestra/docker
+          submodules: 'recursive'
+          ref: 'rbmq-limited'
+          path: 'docker'
+      - name: Launch docker-compose
+        run: |
+          cd docker
+          docker compose up -d --wait --quiet-pull
+          cd ..
+      - name: Caddy trust
+        run: |
+          wget "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
+          chmod +x caddy
+          ./caddy trust
       - name: Run your tests
-        run: pytest --tracing=retain-on-failure
+        run: pytest tests --tracing=retain-on-failure --alluredir=allure-results
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
