@@ -30,7 +30,7 @@ def login(page: Page, cas: bool = False):
 @allure.title("Test the GeoNetwork webapp")
 def test_geo_network_webapp(page: Page):
     page.goto(f"{BASE_URL}/geonetwork/srv/eng/catalog.search")
-    page.wait_for_timeout(20000)
+    # page.wait_for_timeout(20000)
     screenshot_page(page,"geonetwork")
     expect(page.get_by_role("combobox", name="Search")).to_be_visible()
 
