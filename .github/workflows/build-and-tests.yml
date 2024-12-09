@@ -38,6 +38,7 @@ jobs:
         with:
           repository: georchestra/docker
           submodules: 'recursive'
+          ref: 'rbmq-limited'
           path: 'docker'
 
       - name: Launch docker-compose
