@@ -17,7 +17,7 @@ jobs:
       - name: "Building docker image"
         if: github.repository == 'georchestra/e2e-tests'
         run: |
-          docker build -t georchestra/e2e-tests:latest 
+          docker build -t georchestra/e2e-tests:latest .
 
       - name: "Logging in docker.io"
         if: github.repository == 'georchestra/e2e-tests' && github.actor != 'dependabot[bot]' && github.event_name != 'pull_request'
