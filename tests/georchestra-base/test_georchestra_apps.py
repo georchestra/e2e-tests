@@ -6,9 +6,6 @@ from playwright.sync_api import Page, expect
 from tests.common import screenshot_page, login
 
 
-
-
-
 @allure.epic("Web interface")
 @allure.feature("geOrchestra")
 @allure.story("GeoNetwork")
