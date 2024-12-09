@@ -1,7 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Dec 04 04:32:23 GMT 2024","Wed Dec 04 04:32:30 GMT 2024","7059","tests","test_georchestra_apps","","","","Test the MapStore webapp","This test attempts to load the MapStore landing page."
-"failed","Wed Dec 04 04:31:19 GMT 2024","Wed Dec 04 04:32:09 GMT 2024","49949","tests","test_georchestra_apps","","","","Test the GeoNetwork webapp","This test attempts to load GeoNetwork."
-"passed","Wed Dec 04 04:32:09 GMT 2024","Wed Dec 04 04:32:10 GMT 2024","1399","tests","test_georchestra_apps","","","","Test the 'create account' interface from the Console","This test attempts to load the 'create account' page from the Console."
-"passed","Wed Dec 04 04:32:12 GMT 2024","Wed Dec 04 04:32:19 GMT 2024","6903","tests","test_georchestra_apps","","","","Test the DataFeeder webapp","This test attempts to load the 'datafeeder'/'import' wizard page, from the DataFeeder geOrchestra webapp. As it requires to be logged into geOrchestra, an initial login is performed."
-"passed","Wed Dec 04 04:32:19 GMT 2024","Wed Dec 04 04:32:23 GMT 2024","3826","tests","test_georchestra_apps","","","","Test the GeoServer webapp","This test attempts to load the GeoServer main page."
-"passed","Wed Dec 04 04:32:11 GMT 2024","Wed Dec 04 04:32:12 GMT 2024","1036","tests","test_georchestra_apps","","","","Test the 'password recovery' interface from the Console","This test attempts to load the 'password recovery' page from the Console."
