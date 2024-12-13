@@ -10,6 +10,7 @@ from playwright.sync_api import Page, expect
 def test_import_shp_datafeeder(page: Page):
     login(page)
     page.goto("/import/")
+    screenshot_page(page, "datafeeder")
     page.locator("input[type=file]").set_input_files("../../fixtures/antenne.zip")
     page.get_by_role("checkbox").check()
     page.get_by_role("button", name="Upload").click()
@@ -31,6 +32,7 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("textbox").click()
     page.get_by_role("textbox").fill("This is the process")
     page.get_by_role("button", name="next").click()
+    screenshot_page(page, "datafeeder2")
     page.get_by_role("button", name="Submit").click()
     expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=15000)
     expect(page.get_by_role("button", name="Map viewer")).to_be_visible()
