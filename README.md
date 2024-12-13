@@ -35,12 +35,17 @@ This project contains automated tests for the geOrchestra web applications using
       chmod +x caddy
     ./caddy trust
     ```
+4. Change base url in `pytest.ini` file to match your local geOrchestra instance:
+ ```ini
+[pytest]
+addopts = --base-url=https://georchestra-127-0-0-1.nip.io
+ ```
 
 ## Help to generate a test
 
 To help generate a new test, you can use the following command:
 ```sh
-python -m playwright codegen https://demo.georchestra.org
+python -m playwright codegen https://<your-sdi>
 ```
 It will open a browser and you can interact with the website. At the end, it will generate a Python script with the interactions you made.
 
