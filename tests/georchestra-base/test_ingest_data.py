@@ -5,8 +5,8 @@ from playwright.sync_api import Page, expect
 
 @allure.feature("geOrchestra")
 @allure.story("Datafeeder")
-@allure.description("This test attempts to load GeoNetwork.")
-@allure.title("Test the GeoNetwork webapp")
+@allure.description("This test attempts to load a SHP file through datafeeder and check links.")
+@allure.title("Test the Datafeeder webapp and links")
 def test_import_shp_datafeeder(page: Page):
     login(page)
     page.goto("/import/")
