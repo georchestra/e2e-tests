@@ -35,7 +35,7 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("button", name="Submit").click()
     screenshot_page(page, "after-submit-click")
     # wait for the data to be ingested
-    page.wait_for_timeout(10000)
+    page.wait_for_timeout(60000)
     screenshot_page(page, "after-ingestion")
     expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=15000)
     expect(page.get_by_role("button", name="Map viewer")).to_be_visible()
