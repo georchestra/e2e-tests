@@ -4,6 +4,7 @@ import allure
 from playwright.sync_api import Page, expect
 
 from tests.common import screenshot_page, login
+import pytest
 
 
 @allure.epic("Web interface")
@@ -11,6 +12,7 @@ from tests.common import screenshot_page, login
 @allure.story("GeoNetwork")
 @allure.description("This test attempts to load GeoNetwork.")
 @allure.title("Test the GeoNetwork webapp")
+@pytest.mark.order(1)
 def test_geo_network_webapp(page: Page):
     page.goto("/geonetwork/srv/eng/catalog.search")
     page.wait_for_timeout(20000)
@@ -23,6 +25,7 @@ def test_geo_network_webapp(page: Page):
 @allure.story("Console")
 @allure.description("This test attempts to load the 'create account' page from the Console.")
 @allure.title("Test the 'create account' interface from the Console")
+@pytest.mark.order(1)
 def test_console_create_account(page: Page):
     page.goto("/console/account/new")
     screenshot_page(page,"console-createAccount")
@@ -33,6 +36,7 @@ def test_console_create_account(page: Page):
 @allure.story("Console")
 @allure.description("This test attempts to load the 'password recovery' page from the Console.")
 @allure.title("Test the 'password recovery' interface from the Console")
+@pytest.mark.order(1)
 def test_console_password_recovery(page: Page):
     page.goto("/console/account/passwordRecovery")
     screenshot_page(page,"console-passwordRecovery")
@@ -43,6 +47,7 @@ def test_console_password_recovery(page: Page):
 @allure.story("DataFeeder")
 @allure.description("This test attempts to load the 'datafeeder'/'import' wizard page, from the DataFeeder geOrchestra webapp. As it requires to be logged into geOrchestra, an initial login is performed.")
 @allure.title("Test the DataFeeder webapp")
+@pytest.mark.order(1)
 def test_data_feeder_webapp(page: Page):
     login(page)
     page.goto("/import/")
@@ -54,6 +59,7 @@ def test_data_feeder_webapp(page: Page):
 @allure.story("GeoServer")
 @allure.description("This test attempts to load the GeoServer main page.")
 @allure.title("Test the GeoServer webapp")
+@pytest.mark.order(1)
 def test_geo_server_webapp(page: Page):
     page.goto("/geoserver/web/")
     screenshot_page(page,"geoserver")
@@ -64,6 +70,7 @@ def test_geo_server_webapp(page: Page):
 @allure.story("MapStore")
 @allure.description("This test attempts to load the MapStore landing page.")
 @allure.title("Test the MapStore webapp")
+@pytest.mark.order(1)
 def test_map_store_webapp(page: Page):
     page.goto("/mapstore/")
     screenshot_page(page,"mapstore")
