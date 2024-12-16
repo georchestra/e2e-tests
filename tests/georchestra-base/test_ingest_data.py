@@ -35,29 +35,30 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("button", name="Submit").click()
     screenshot_page(page, "after-submit-click")
     # wait for the data to be ingested
-    page.wait_for_timeout(60000)
+    page.wait_for_timeout(30000)
     screenshot_page(page, "after-ingestion")
     expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=15000)
     expect(page.get_by_role("button", name="Map viewer")).to_be_visible()
     with page.expect_popup() as page1_info:
         page.get_by_role("button", name="Metadata record").click()
     page1 = page1_info.value
+    page.wait_for_timeout(10000)
+    screenshot_page(page1, "metadata")
     expect(page1.get_by_text("Awesome").first).to_be_visible()
     expect(page1.get_by_text("Antennes - WMS")).to_be_visible()
-    screenshot_page(page1, "metadata")
     page1.close()
     with page.expect_popup() as page2_info:
         page.get_by_role("button", name="Map viewer").click()
     page2 = page2_info.value
-    expect(page2.locator("canvas")).to_be_visible()
     screenshot_page(page2, "mapviewer")
+    expect(page2.locator("canvas")).to_be_visible()
     page2.close()
     with page.expect_popup() as page3_info:
         page.get_by_role("button", name="OGC API").click()
     page3 = page3_info.value
     page3_url = page3_info.value.url
-    expect(page3.locator("pre")).to_be_visible()
     screenshot_page(page3, "ogcapi")
+    expect(page3.locator("pre")).to_be_visible()
     page3.close()
 
     response = page.goto(page3_url)
