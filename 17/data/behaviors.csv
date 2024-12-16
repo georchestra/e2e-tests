@@ -1,0 +1,7 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"Web interface","geOrchestra","Console","0","0","2","0","0"
+"Web interface","geOrchestra","DataFeeder","0","0","1","0","0"
+"Web interface","geOrchestra","MapStore","0","0","1","0","0"
+"Web interface","geOrchestra","GeoNetwork","0","0","1","0","0"
+"Web interface","geOrchestra","GeoServer","0","0","1","0","0"
+"","geOrchestra","Datafeeder","0","1","0","0","0"
