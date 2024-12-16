@@ -60,7 +60,6 @@ jobs:
         run: |
           cd ./tests 
           pwd 
-          ls
           pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 --rerun-except=AssertionError 
           cd ..
 
