@@ -1,2 +1,4 @@
 allure-pytest
 pytest-playwright
+pyyaml
+pytest-rerunfailures

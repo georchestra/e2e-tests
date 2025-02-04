@@ -1,9 +1,14 @@
-name: Playwright Tests
+name: Execute tests on georchestra/docker:master
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  schedule:
+    - cron: "0 4 * * 1"
+
+permissions: write-all
+
 jobs:
   test:
     timeout-minutes: 60
@@ -12,6 +17,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: tests
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 georchestra-127-0-0-1.nip.io" | sudo tee -a /etc/hosts
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -30,7 +38,7 @@ jobs:
         with:
           repository: georchestra/docker
           submodules: 'recursive'
-          ref: 'rbmq-limited'
+          ref: 'data-api-24'
           path: 'docker'
 
       - name: Launch docker-compose
@@ -38,6 +46,9 @@ jobs:
           cd docker
           docker compose up -d --wait --quiet-pull
           cd ..
+          echo "Trigger GN wro4j..."
+          curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
+        
 
       - name: Caddy trust
         run: |
@@ -46,7 +57,11 @@ jobs:
           ./caddy trust
 
       - name: Run your tests
-        run: pytest tests --tracing=retain-on-failure --alluredir=allure-results
+        run: |
+          cd ./tests 
+          pwd 
+          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1
+          cd ..
 
       - name: Load test report history
         uses: actions/checkout@v3
@@ -60,9 +75,8 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: allure-results
+          allure_results: tests/allure-results
+          keep_reports: 5
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
@@ -71,6 +85,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          force_orphan: true
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

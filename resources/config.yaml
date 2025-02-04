@@ -1,0 +1,4 @@
+local.account:
+  username: 'testadmin'
+  password: 'testadmin'
+write_tests_disabled: 'false'
