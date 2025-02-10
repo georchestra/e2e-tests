@@ -44,7 +44,12 @@ jobs:
       - name: Launch docker-compose
         run: |
           cd docker
-          docker compose up -d --wait --quiet-pull
+          if docker compose up -d --wait --quiet-pull ; then
+              echo "docker compose succeedeed"
+          else
+              docker compose logs
+              exit 1
+          fi
           cd ..
           echo "Trigger GN wro4j..."
           curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
