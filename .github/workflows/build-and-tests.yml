@@ -52,7 +52,7 @@ jobs:
 
       - name: Caddy trust
         run: |
-          wget "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
+          wget -q "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
           chmod +x caddy
           ./caddy trust
 
