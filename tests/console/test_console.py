@@ -84,6 +84,7 @@ def test_03_change_mail_and_password(page: Page, context: BrowserContext):
     page1 = context.new_page()
     page1.goto("/webmail/?_task=mail&_mbox=INBOX")
     page1.get_by_role("link", name="Inbox").click()
+    screenshot_page(page1, "webmail")
     page1.get_by_role("link", name="[geOrchestra] Update your e-").click()
     screenshot_page(page1, "update-email")
     with page1.expect_popup() as page2_info:
