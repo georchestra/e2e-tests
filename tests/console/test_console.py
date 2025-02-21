@@ -11,7 +11,7 @@ import pytest
 @allure.story("Creation of user by an admin")
 @allure.description("This test attempts to create the John Doe user by an admin.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_01_create_signup(page: Page):
+def test_create_signup(page: Page):
     page.goto("/datahub/")
     page.get_by_role("link", name="login").click()
     page.get_by_role("link", name="Register").click()
@@ -37,7 +37,7 @@ def test_01_create_signup(page: Page):
 @allure.story("Validation of user by an admin")
 @allure.description("This test attempts to validate the John Doe user by an admin.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_02_validate_created_user(page: Page):
+def test_validate_created_user(page: Page):
     login(page)
     page.goto("/console/manager/home")
     page.get_by_role("link", name="Users", exact=True).click()
@@ -61,7 +61,7 @@ def test_02_validate_created_user(page: Page):
 @allure.story("Change email and password from newest user")
 @allure.description("This test attempts to change Bob Dylan's informations.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_03_change_mail_and_password(page: Page, context: BrowserContext):
+def test_change_mail_and_password(page: Page, context: BrowserContext):
     login(page, username="bdylan", password="azerty123456")
     expect(page.get_by_role("link", name="Bob Dylan")).to_be_visible()
     screenshot_page(page, "bob-dylan-login")
@@ -101,7 +101,7 @@ def test_03_change_mail_and_password(page: Page, context: BrowserContext):
 @allure.story("Change bdylan's roles and delegations")
 @allure.description("This test attempts to change Bob Dylan's roles and add a delagation.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_04_roles_and_delegations(page: Page):
+def test_roles_and_delegations(page: Page):
     login(page, username="bdylan", password="bdylan123456")
     page.goto("/whoami")
     expect(page.locator("pre")).to_contain_text("\"username\":\"bdylan\",\"roles\":[\"ROLE_USER\"]")
@@ -138,7 +138,7 @@ def test_04_roles_and_delegations(page: Page):
 @allure.story("Creation of user by an admin")
 @allure.description("This test attempts to create the John Doe user by an admin.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_05_create_user_by_admin(page: Page):
+def test_create_user_by_admin(page: Page):
     login(page)
     page.goto("/console/manager/home")
     page.get_by_role("link", name="Users", exact=True).click()
@@ -168,7 +168,7 @@ def test_05_create_user_by_admin(page: Page):
 @allure.story("Add logo to organization")
 @allure.description("This test attempts add a logo to Camptocamp organization")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_06_upload_organization_logo(page: Page):
+def test_upload_organization_logo(page: Page):
     login(page)
     page.goto("/console/manager/home")
     page.get_by_role("button", name="administration").click()
@@ -189,7 +189,7 @@ def test_06_upload_organization_logo(page: Page):
 @allure.story("Delete a user by an admin")
 @allure.description("This test attempts delete the John Doe user by an admin.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
-def test_07_delete_user(page: Page):
+def test_delete_user(page: Page):
     login(page)
     page.goto("/console/manager/home")
     page.get_by_role("link", name="Users", exact=True).click()
