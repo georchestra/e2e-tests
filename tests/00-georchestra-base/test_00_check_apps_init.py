@@ -1,4 +1,3 @@
-import os
 import allure
 
 from playwright.sync_api import Page, expect
@@ -7,11 +6,11 @@ from tests.common import screenshot_page, login
 import pytest
 
 
-@allure.epic("Web interface")
-@allure.feature("geOrchestra")
-@allure.story("GeoNetwork")
+@allure.epic("Geonetwork")
+@allure.feature("Wro4j")
+@allure.story("Load wro4j cache before testing")
 @allure.description("This test attempts to load every GeoNetwork wro4j.")
-@allure.title("Test the GeoNetwork webapp")
+@allure.title("Load GeoNetwork wro4j cache")
 @pytest.mark.flaky(reruns=5)
 def test_geo_network_webapp(page: Page):
     login(page)

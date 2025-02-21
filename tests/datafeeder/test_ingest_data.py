@@ -1,4 +1,4 @@
-import allure, os
+import allure
 
 from helper.configuration_manager import ConfigurationManager
 from tests.common import screenshot_page, login
@@ -6,16 +6,16 @@ from playwright.sync_api import Page, expect
 
 import pytest
 
-@allure.feature("geOrchestra")
-@allure.story("Datafeeder")
+@allure.epic("Datafeeder")
+@allure.feature("Ingestion")
+@allure.story("Ingest data in Geonetwork, Geoserver and Data-api")
 @allure.description("This test attempts to load a SHP file through datafeeder and check links.")
-@allure.title("Test the Datafeeder webapp and links")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
 def test_import_shp_datafeeder(page: Page):
     login(page)
     page.goto("/import/")
     screenshot_page(page, "datafeeder")
-    page.locator("input#undefined").first.set_input_files(os.path.abspath("./fixtures/antenne.zip"))
+    page.locator("input#undefined").first.set_input_files("./fixtures/antenne.zip")
     page.get_by_role("checkbox").check()
     page.get_by_role("button", name="Upload").click()
     page.get_by_role("button", name="-", exact=True).click()
@@ -39,9 +39,8 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("button", name="Submit").click()
     screenshot_page(page, "after-submit-click")
     # wait for the data to be ingested
-    page.wait_for_timeout(30000)
+    expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=45000)
     screenshot_page(page, "after-ingestion")
-    expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=15000)
     expect(page.get_by_role("button", name="Map viewer")).to_be_visible()
     with page.expect_popup() as page1_info:
         page.get_by_role("button", name="Metadata record").click()

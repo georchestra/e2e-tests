@@ -74,3 +74,12 @@ FROM georchestra/e2e-tests:latest
 
 COPY mytests /app/tests/mytests
 ```
+
+## Allure tags
+
+Those tags are used to filter the tests in the Allure report.
+
+From Allure website :
+- epic_tag = 'theme'
+- feature_tag = 'functionality'
+- story_tag = 'task'
