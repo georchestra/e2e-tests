@@ -156,6 +156,7 @@ def test_create_user_by_admin(page: Page):
     expect(page.get_by_role("heading", name="All users / Doe John")).to_be_visible()
     screenshot_page(page, "user-creation-by-admin")
     page.get_by_role("link", name="Dashboard").click()
+    page.reload()
     expect(page.get_by_role("cell", name="jdoe").first).to_be_visible()
     expect(page.get_by_role("cell", name=" User created").first).to_be_visible()
     screenshot_page(page, "check-logs")
@@ -175,7 +176,7 @@ def test_upload_organization_logo(page: Page):
     with page.expect_file_chooser() as fc_info:
         page.get_by_text("Upload logo").click()
     file_chooser = fc_info.value
-    file_chooser.set_files("../../fixtures/logoipsum.png")
+    file_chooser.set_files("./fixtures/logoipsum.png")
     page.get_by_role("button", name="Save").click()
     page.get_by_role("link", name="All orgs").click()
     page.get_by_role("link", name="Camptocamp").click()
