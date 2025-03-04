@@ -65,7 +65,7 @@ jobs:
         run: |
           cd ./tests 
           pwd 
-          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1
+          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 -v
           cd ..
 
       - name: Load test report history
