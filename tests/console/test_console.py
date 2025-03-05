@@ -61,6 +61,7 @@ def test_validate_created_user(page: Page):
 @allure.story("Change email and password from newest user")
 @allure.description("This test attempts to change Bob Dylan's informations.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
+@pytest.mark.flaky(reruns=0)
 def test_change_mail_and_password(page: Page, context: BrowserContext):
     login(page, username="bdylan", password="azerty123456")
     expect(page.get_by_role("link", name="Bob Dylan")).to_be_visible()
