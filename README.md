@@ -49,6 +49,21 @@ python -m playwright codegen https://<your-sdi>
 ```
 It will open a browser and you can interact with the website. At the end, it will generate a Python script with the interactions you made.
 
+## Tag tests
+
+Those tags are used to filter the tests in the Allure report.
+
+From Allure website :
+- epic_tag = 'theme'
+- feature_tag = 'functionality'
+
+```python 
+@allure.epic("Geonetwork")
+@allure.feature("Wro4j")
+@allure.description("This test attempts to load every GeoNetwork wro4j.")
+@allure.title("Load GeoNetwork wro4j cache")
+```
+
 ## Running Tests
 
 To run the tests locally, use the following command:
@@ -75,11 +90,3 @@ FROM georchestra/e2e-tests:latest
 COPY mytests /app/tests/mytests
 ```
 
-## Allure tags
-
-Those tags are used to filter the tests in the Allure report.
-
-From Allure website :
-- epic_tag = 'theme'
-- feature_tag = 'functionality'
-- story_tag = 'task'

@@ -38,7 +38,7 @@ jobs:
         with:
           repository: georchestra/docker
           submodules: 'recursive'
-          ref: 'data-api-24'
+          ref: 'master'
           path: 'docker'
 
       - name: Launch docker-compose

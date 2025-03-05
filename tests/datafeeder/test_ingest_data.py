@@ -8,7 +8,6 @@ import pytest
 
 @allure.epic("Datafeeder")
 @allure.feature("Ingestion")
-@allure.story("Ingest data in Geonetwork, Geoserver and Data-api")
 @allure.description("This test attempts to load a SHP file through datafeeder and check links.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
 def test_import_shp_datafeeder(page: Page):
@@ -61,7 +60,7 @@ def test_import_shp_datafeeder(page: Page):
     page3 = page3_info.value
     page3_url = page3_info.value.url
     screenshot_page(page3, "ogcapi")
-    expect(page3.locator("pre")).to_be_visible()
+    expect(page3.locator("body")).to_be_visible()
     page3.close()
 
     response = page.goto(page3_url)

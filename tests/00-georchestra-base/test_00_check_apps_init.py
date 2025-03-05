@@ -8,7 +8,6 @@ import pytest
 
 @allure.epic("Geonetwork")
 @allure.feature("Wro4j")
-@allure.story("Load wro4j cache before testing")
 @allure.description("This test attempts to load every GeoNetwork wro4j.")
 @allure.title("Load GeoNetwork wro4j cache")
 @pytest.mark.flaky(reruns=5)
