@@ -98,6 +98,7 @@ def test_change_mail_and_password(page: Page, context: BrowserContext):
 @allure.feature("User roles and delegations change")
 @allure.description("This test attempts to change Bob Dylan's roles and add a delagation.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
+@pytest.mark.flaky(reruns=0)
 def test_roles_and_delegations(page: Page):
     login(page, username="bdylan", password="bdylan123456")
     page.goto("/whoami")
