@@ -1,0 +1,212 @@
+CREATE SCHEMA IF NOT EXISTS psc;
+
+CREATE TABLE psc.armoires
+(
+    fid          integer NOT NULL,
+    the_geom     public.geometry(Point, 4326),
+    "@id"        character varying(80),
+    man_made     character varying(80),
+    operator     character varying(80),
+    street_cab   character varying(80),
+    telecom      character varying(80),
+    telecom_me   character varying(80),
+    "@timestamp" character varying(80),
+    "@version"   character varying(80),
+    "@changeset" character varying(80),
+    "@user"      character varying(80),
+    "@uid"       character varying(80),
+    colour       character varying(80),
+    ref          character varying(80),
+    note         character varying(80)
+);
+
+ALTER TABLE psc.armoires
+    OWNER TO georchestra;
+
+CREATE SEQUENCE psc.armoires_fid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE psc.armoires_fid_seq OWNER TO georchestra;
+
+
+ALTER SEQUENCE psc.armoires_fid_seq OWNED BY psc.armoires.fid;
+
+
+ALTER TABLE ONLY psc.armoires
+    ALTER COLUMN fid SET DEFAULT nextval('psc.armoires_fid_seq'::regclass);
+
+
+INSERT INTO psc.armoires
+VALUES (1, '0101000020E61000004C3F975FBCAD17404D31074147C84640', 'node/641496661', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-08-28T14:32:04Z', '2', '41757057', 'John Doe', '13276', '', '', ''),
+       (2, '0101000020E61000002EC72B103DB117401DE38A8BA3C84640', 'node/692984752', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:45Z', '2', '30478938', 'John Doe', '13276', '', '', ''),
+       (3, '0101000020E61000006159C40B7DAB1740D64C632074C84640', 'node/1177173027', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-10-08T16:25:45Z', '2', '42737385', 'John Doe', '13276', 'gray',
+        'ITA PT002231', ''),
+       (4, '0101000020E61000004ACE893DB4AF174072DF6A9DB8C84640', 'node/1262417990', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2017-05-21T18:57:23Z', '2', '48868217', 'John Doe', '13276', '',
+        'ITA PT002228', ''),
+       (5, '0101000020E61000000080AD5CB9A817405631F03735C84640', 'node/2410735886', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2018-01-15T19:49:12Z', '2', '55473836', 'John Doe', '13276', '',
+        'ITA PT002221', ''),
+       (6, '0101000020E6100000B7CAB84EC8B31740377579CE71C84640', 'node/3476793469', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0003', ''),
+       (7, '0101000020E6100000B91C0AFA66A6174061BB20C77BC84640', 'node/3476793472', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0086', ''),
+       (8, '0101000020E6100000A43094B833A817406DC08CCE9EC84640', 'node/3476793474', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0084', ''),
+       (9, '0101000020E61000009D77ADCE7BAD1740B5C189E8D7C84640', 'node/3476793475', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '', '', ''),
+       (10, '0101000020E6100000E0CD6449CAAF1740F40E01D1DDC84640', 'node/3476793476', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '', '', ''),
+       (11, '0101000020E61000008DAE772403A517407C3D04FAE9C84640', 'node/3476793478', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:42Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0089', ''),
+       (12, '0101000020E610000062218491A8A91740B102D770ECC84640', 'node/3476793479', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0087', ''),
+       (13, '0101000020E61000006BA22A018CAA1740218DAFE2F9C84640', 'node/3476793480', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0034', ''),
+       (14, '0101000020E6100000406B7EFCA5A51740E28A30EAFFC84640', 'node/3476793482', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0088', ''),
+       (15, '0101000020E6100000BF901F3BB9A817402B7AF18F08C94640', 'node/3476793483', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0090', ''),
+       (16, '0101000020E6100000B10B5064F7A617404A630F481DC94640', 'node/3476793484', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0033', ''),
+       (17, '0101000020E6100000837FB67AF3A8174095568D6F39C94640', 'node/3476793485', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0032', ''),
+       (18, '0101000020E6100000955286600BA81740CCFA83375AC94640', 'node/3476793487', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0031', ''),
+       (19, '0101000020E61000009F10F05AF8A81740B78B1F1961C94640', 'node/3476793488', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0030', ''),
+       (20, '0101000020E6100000C31E245525AB174025AE635C71C94640', 'node/3476793490', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-04-25T16:56:43Z', '1', '30478938', 'John Doe', '13276', '',
+        'ITA PT 0147', ''),
+       (21, '0101000020E61000005F4B23C1AFBC1740D8CE9C9A70C84640', 'node/3507110869', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:42Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0067', ''),
+       (22, '0101000020E6100000BE75B46098BA17401D3BA8C475C84640', 'node/3507110870', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:42Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0012', ''),
+       (23, '0101000020E61000003FA1E8CB1CBC17400722307B7EC84640', 'node/3507110871', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:42Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0056', ''),
+       (24, '0101000020E61000007DF3D198FFB61740ACCABE2B82C84640', 'node/3507110872', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:43Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0017', ''),
+       (25, '0101000020E6100000031D52B1D6B51740E6F6DC5383C84640', 'node/3507110873', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:43Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0024', ''),
+       (26, '0101000020E610000066F4482822B817406D455156C2C84640', 'node/3507110874', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:43Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0138', ''),
+       (27, '0101000020E6100000C8F2093433BE1740EE0912DBDDC84640', 'node/3507110875', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:43Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0119', ''),
+       (28, '0101000020E61000003646A11B50BD1740DEFE017BF1C84640', 'node/3507110876', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-05-09T15:26:43Z', '1', '30939823', 'John Doe', '13276', '',
+        'ITA PT 0134', ''),
+       (29, '0101000020E6100000E465F2727DBC17404648388831C94640', 'node/3581173068', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-06-08T17:12:11Z', '1', '31822146', 'John Doe', '13276', '', '', ''),
+       (30, '0101000020E6100000D78F036509A11740C2FC153257C94640', 'node/3583653154', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-06-09T14:35:19Z', '1', '31845974', 'John Doe', '13276', '', '', ''),
+       (31, '0101000020E610000060837467DCA217406AE44E441AC94640', 'node/3600846864', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-06-17T17:46:51Z', '1', '32034560', 'John Doe', '13276', '', '', ''),
+       (32, '0101000020E610000040A6B5696C9F1740932FB2AE1BC94640', 'node/3631830062', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-07-02T17:42:43Z', '1', '32361720', 'John Doe', '13276', '', '', ''),
+       (33, '0101000020E6100000C8A1348A9B91174023049ABE8DCA4640', 'node/3631830065', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-07-02T17:42:43Z', '1', '32361720', 'John Doe', '13276', '', '', ''),
+       (34, '0101000020E6100000845A1D4AFEB9174062D8614CFAC84640', 'node/3751568034', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-09-20T13:44:36Z', '1', '34140955', 'John Doe', '13276', '',
+        'ITA PT 1071', ''),
+       (35, '0101000020E610000024DAE9622EA4174020F69DBA4DC94640', 'node/3768511976', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-10-02T07:41:34Z', '1', '34383212', 'John Doe', '13276', '',
+        'ITA PT 1109', 'FI-73065-001B'),
+       (36, '0101000020E610000073785270C2BE17405388916F00C94640', 'node/3779816621', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2015-10-09T17:43:49Z', '1', '34535001', 'John Doe', '13276', '',
+        'ITA PT 1075', ''),
+       (37, '0101000020E61000007D5D86FF74B317402F72AA10EAC84640', 'node/4058429834', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-03-13T16:20:13Z', '1', '37803004', 'John Doe', '13276', '',
+        'ITA PT 1045', ''),
+       (38, '0101000020E61000007419486128B917403B97981D98C94640', 'node/4058429835', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-03-13T16:20:13Z', '1', '37803004', 'John Doe', '13276', '',
+        'ITA PT 1029', ''),
+       (39, '0101000020E6100000079964E42CAC1740D89F1FA1C1CA4640', 'node/4058429836', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-03-13T16:20:13Z', '1', '37803004', 'John Doe', '13276', '',
+        'ITA PT 0933', ''),
+       (40, '0101000020E610000073FD71B158B11740CEC5DFF604CB4640', 'node/4058429837', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-03-13T16:20:13Z', '1', '37803004', 'John Doe', '13276', '',
+        'ITA PT 0944', ''),
+       (41, '0101000020E61000003824FFDD4CAE1740B4FFA61C38CB4640', 'node/4058429838', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-03-13T16:20:13Z', '1', '37803004', 'John Doe', '13276', '',
+        'ITA PT 0949', ''),
+       (42, '0101000020E610000073E0302CDAAF174045E5153E11C74640', 'node/4187687595', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-05-15T17:28:37Z', '1', '39335577', 'John Doe', '13276', '', '',
+        'Not sure of the exact position, did not have my GPS running during the walk ...'),
+       (43, '0101000020E61000007284B12A67AC17405A9D9CA1B8C84640', 'node/4355518721', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-09-06T19:52:26Z', '2', '41965469', 'John Doe', '13276', '',
+        'ITA PT002228', ''),
+       (44, '0101000020E61000005E752ED68195174077764364A2C94640', 'node/4356680269', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-08-18T22:40:43Z', '1', '41545782', 'John Doe', '13276', '',
+        'ITA PT 1087', ''),
+       (45, '0101000020E6100000BCA7BC676E971740154328A556CC4640', 'node/4359210230', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-08-20T18:27:02Z', '1', '41580813', 'John Doe', '13276', '', '', ''),
+       (46, '0101000020E6100000C313D5B6BCAD1740FFDB76EB46C84640', 'node/4371207173', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-08-28T14:32:04Z', '1', '41757057', 'John Doe', '13276', '', '', ''),
+       (47, '0101000020E61000000B7E1B62BCAE174065D707A3A3C84640', 'node/4387795006', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-09-06T19:52:25Z', '1', '41965469', 'John Doe', '13276', '',
+        'ITA PT002230', ''),
+       (48, '0101000020E610000062D5C5127B8D174012D89C8367CE4640', 'node/4433158566', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-10-05T18:35:28Z', '1', '42665342', 'John Doe', '13276', '',
+        'ITA PT002205', ''),
+       (49, '0101000020E610000034A95780A5A917401A1E56139FC84640', 'node/4437906419', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-10-08T16:25:44Z', '1', '42737385', 'John Doe', '13276', '',
+        'ITA PT002431', ''),
+       (50, '0101000020E61000003FC0FFFBF8A81740857D96427BC84640', 'node/4449184255', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-10-15T13:04:43Z', '1', '42917672', 'John Doe', '13276', '',
+        'ITA PT1034', ''),
+       (51, '0101000020E6100000EDFB2603F6AF1740538C987E2EC84640', 'node/4485462143', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2016-11-26T16:08:44Z', '2', '43966344', 'John Doe', '13276', '',
+        'ITA PT002233', ''),
+       (52, '0101000020E61000002F74DB74BAB21740DCF4673F52C84640', 'node/4809693214', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2017-04-22T12:45:43Z', '1', '48032204', 'John Doe', '13276', '',
+        'ITA PT002725', ''),
+       (53, '0101000020E61000005AC1CAFCFE98174002C23D8512CA4640', 'node/4829209104', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2017-05-01T17:54:43Z', '1', '48314106', 'John Doe', '13276', '',
+        'ITA PT 1098', ''),
+       (54, '0101000020E61000007D2B6DCC46B2174079D78F0365C84640', 'node/4835350550', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2017-05-04T19:16:35Z', '1', '48403611', 'John Doe', '13276', '',
+        'ITA PT002720', ''),
+       (55, '0101000020E6100000F2AA18F89BA21740473F75070CC84640', 'node/5341439536', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2018-01-15T19:49:12Z', '1', '55473836', 'John Doe', '13276', '',
+        'ITA PT002206', ''),
+       (56, '0101000020E61000008868CFC023AD1740D97A8670CCC94640', 'node/5387183821', 'street_cabinet', 'Orange',
+        'telecom', 'connection', 'fibre', '2018-02-04T17:10:53Z', '2', '56061295', 'John Doe', '13276', '',
+        'ITA PT002974', '');
+
+
+SELECT pg_catalog.setval('psc.armoires_fid_seq', 56, true);
+
+
+ALTER TABLE ONLY psc.armoires
+    ADD CONSTRAINT armoires_pkey PRIMARY KEY (fid);
+
+
+CREATE INDEX spatial_armoires_the_geom ON psc.armoires USING gist (the_geom);

@@ -173,7 +173,7 @@ def test_upload_organization_logo(page: Page):
     with page.expect_file_chooser() as fc_info:
         page.get_by_text("Upload logo").click()
     file_chooser = fc_info.value
-    file_chooser.set_files("./fixtures/logoipsum.png")
+    file_chooser.set_files("./resources/images/logoipsum.png")
     page.get_by_role("button", name="Save").click()
     page.get_by_role("link", name="All orgs").click()
     page.get_by_role("link", name="Camptocamp").click()

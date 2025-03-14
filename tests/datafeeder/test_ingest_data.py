@@ -14,7 +14,7 @@ def test_import_shp_datafeeder(page: Page):
     login(page)
     page.goto("/import/")
     screenshot_page(page, "datafeeder")
-    page.locator("input#undefined").first.set_input_files("./fixtures/antenne.zip")
+    page.locator("input#undefined").first.set_input_files("./resources/files/antenne.zip")
     page.get_by_role("checkbox").check()
     page.get_by_role("button", name="Upload").click()
     page.get_by_role("button", name="-", exact=True).click()

@@ -46,10 +46,18 @@ jobs:
           cd docker
           if docker compose up -d --wait --quiet-pull ; then
               echo "docker compose succeedeed"
+              docker compose cp ../tests/init/dump.sql postgis:/dump.sql
+              docker compose exec -it postgis psql -U georchestra -d datafeeder -f /dump.sql 
+              echo "Table armoires created in datafeeder db, schema psc"
+              docker compose cp  ../tests/init/psc geoserver:/mnt/geoserver_datadir/workspaces/psc
+              docker compose restart geoserver --wait
+              echo "Geoserver layer added and restarted"
           else
               docker compose logs
               exit 1
           fi
+          cd tests
+          python init/insert_metadata.py
           cd ..
           echo "Trigger GN wro4j..."
           curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
