@@ -2,4 +2,3 @@ allure-pytest
 pytest-playwright
 pyyaml
 pytest-rerunfailures
-git+https://github.com/camptocamp/python-geonetwork@f7c57fe9a21af79123947b8003633d7cac8c12e5

@@ -25,6 +25,17 @@ jobs:
         with:
           python-version: '3.11'
 
+      - uses: actions/checkout@v4
+        with:
+          repository: camptocamp/python-geonetwork
+          path: geonetworkapi
+
+      - name: Install GN-client
+        run: |
+          cd geonetworkapi
+          pip install .
+          cd..
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
