@@ -56,8 +56,10 @@ jobs:
               docker compose logs
               exit 1
           fi
-          cd tests
+          cd ../tests
+          echo "Insert metadata in GN..."
           python init/insert_metadata.py
+          echo "Metadata inserted in GN"
           cd ..
           echo "Trigger GN wro4j..."
           curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
