@@ -34,7 +34,7 @@ jobs:
         run: |
           cd geonetworkapi
           pip install .
-          cd..
+          cd ..
 
       - name: Install dependencies
         run: |
