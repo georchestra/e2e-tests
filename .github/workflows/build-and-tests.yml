@@ -50,7 +50,7 @@ jobs:
               docker compose exec -it postgis psql -U georchestra -d datafeeder -f /dump.sql 
               echo "Table armoires created in datafeeder db, schema psc"
               docker compose cp  ../tests/init/psc geoserver:/mnt/geoserver_datadir/workspaces/psc
-              docker compose restart geoserver --wait
+              docker compose restart geoserver
               echo "Geoserver layer added and restarted"
           else
               docker compose logs
