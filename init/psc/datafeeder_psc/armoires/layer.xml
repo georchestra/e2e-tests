@@ -1,0 +1,21 @@
+<layer>
+  <name>armoires</name>
+  <id>LayerInfoImpl--29723aa:1959406b71f:-7fdf</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-78ff667e:12476299803:-7ff9</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--29723aa:1959406b71f:-7fe0</id>
+  </resource>
+  <queryable>true</queryable>
+  <opaque>false</opaque>
+  <attribution>
+    <title>Project Steering Committee</title>
+    <href>https://www.georchestra.org/</href>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2025-03-14 09:51:58.838 UTC</dateCreated>
+  <dateModified>2025-03-14 09:51:58.942 UTC</dateModified>
+</layer>

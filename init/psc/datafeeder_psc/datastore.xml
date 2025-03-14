@@ -1,0 +1,24 @@
+<dataStore>
+  <id>DataStoreInfoImpl--29723aa:1959406b71f:-7fe1</id>
+  <name>datafeeder_psc</name>
+  <description>Datafeeder uploaded datasets</description>
+  <type>PostGIS (JNDI)</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl--29723aa:1959406b71f:-7fe3</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="schema">psc</entry>
+    <entry key="Estimated extends">true</entry>
+    <entry key="preparedStatements">true</entry>
+    <entry key="jndiReferenceName">jdbc/datafeeder</entry>
+    <entry key="Loose bbox">false</entry>
+    <entry key="dbtype">postgis</entry>
+    <entry key="namespace">https://georchestra-127-0-0-1.nip.io/import/psc</entry>
+    <entry key="storename">&lt;storename&gt;</entry>
+    <entry key="workspacename">&lt;workspacename&gt;</entry>
+  </connectionParameters>
+  <__default>false</__default>
+  <dateCreated>2025-03-14 09:51:58.641 UTC</dateCreated>
+  <disableOnConnFailure>false</disableOnConnFailure>
+</dataStore>
