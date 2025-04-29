@@ -6,7 +6,7 @@ from requests.exceptions import HTTPError
 @allure.epic("Data API")
 @allure.feature("Headers")
 @allure.description("Test if data-api response headers contains only one Access-Control-Allow-Origin header.")
-@allure.title("Test the GeoNetwork webapp")
+@allure.title("Test the data-api headers")
 def test_data_api_no_double_access_control_allow_origin(base_url):
     url = base_url + "/data/ogcapi/"
     headers = {"Origin": base_url}
@@ -21,7 +21,7 @@ def test_data_api_no_double_access_control_allow_origin(base_url):
 @allure.epic("Geoserver")
 @allure.feature("Headers")
 @allure.description("This test attempts to load GeoNetwork.")
-@allure.title("Test the GeoNetwork webapp")
+@allure.title("Test the Geoserver headers")
 def test_geoserver_wms_no_double_access_control_allow_origin(base_url: str):
     url = base_url + "/geoserver/wms"
     headers = {"Origin": base_url}
