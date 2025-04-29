@@ -24,7 +24,7 @@ def test_data_api_no_double_access_control_allow_origin(base_url):
 @allure.title("Test the Geoserver headers")
 def test_geoserver_wms_no_double_access_control_allow_origin(base_url: str):
     url = base_url + "/geoserver/wms"
-    headers = {"Origin": "http://localhost:1234/"}
+    headers = {"Origin": base_url}
 
     response = requests.get(url, headers=headers, verify=False)
     response.raise_for_status()
