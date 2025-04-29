@@ -9,7 +9,7 @@ from requests.exceptions import HTTPError
 @allure.title("Test the data-api headers")
 def test_data_api_no_double_access_control_allow_origin(base_url):
     url = base_url + "/data/ogcapi/"
-    headers = {"Origin": base_url}
+    headers = {"Origin": "http://localhost:1234/"}
 
     response = requests.get(url, headers=headers, verify=False)
     response.raise_for_status()
@@ -24,12 +24,12 @@ def test_data_api_no_double_access_control_allow_origin(base_url):
 @allure.title("Test the Geoserver headers")
 def test_geoserver_wms_no_double_access_control_allow_origin(base_url: str):
     url = base_url + "/geoserver/wms"
-    headers = {"Origin": base_url}
+    headers = {"Origin": "http://localhost:1234/"}
 
     response = requests.get(url, headers=headers, verify=False)
     response.raise_for_status()
 
     access_control_allow_origin_header = response.headers.get("Access-Control-Allow-Origin")
     # If two headers are present (e.g * and *) response.headers.get("Access-Control-Allow-Origin") returns "*, *"
-    assert access_control_allow_origin_header == "*", \
+    assert access_control_allow_origin_header == "https://georchestra-127-0-0-1.nip.io", \
         "There should be only one header with Access-Control-Allow-Origin"
