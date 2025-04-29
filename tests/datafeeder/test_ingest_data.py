@@ -63,6 +63,7 @@ def test_import_shp_datafeeder(page: Page):
     expect(page3.locator("body")).to_be_visible()
     page3.close()
 
+    page.set_extra_http_headers({"origin": "http://localhost:1234/"})
     response = page.goto(page3_url)
     assert response.headers["content-type"] == "application/geo+json"
     assert 0 < len(response.headers["access-control-allow-origin"]) < 2
