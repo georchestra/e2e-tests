@@ -37,6 +37,7 @@ class TestEmbedded:
             pytest.skip("Metadata import test didn't run successfully")
 
         page.goto("http://localhost:3000/datahub-map.html")
+        page.wait_for_timeout(3000)
         expect(page.get_by_role("heading", name="should display html map")).to_be_visible()
         expect(page.locator("canvas")).to_be_visible()
         expect(page.get_by_label("Map Layer Legend").locator("div")).to_be_visible()
@@ -55,6 +56,7 @@ class TestEmbedded:
             pytest.skip("Metadata import test didn't run successfully")
 
         page.goto("http://localhost:3000/datahub-table.html")
+        page.wait_for_timeout(3000)
         expect(page.get_by_role("heading", name="should display html table")).to_be_visible()
         expect(page.get_by_text("Objects in this dataset. 1 - 10 of 110")).to_be_visible()
         expect(page.locator("[id=\"table-item-TOUR_Rando_Etape_point\\.1\"]").get_by_role("cell", name="Circuit des Evêques")).to_be_visible()
