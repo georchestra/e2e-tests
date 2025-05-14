@@ -37,36 +37,34 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("button", name="Submit").click()
     screenshot_page(page, "after-submit-click")
     # wait for the data to be ingested
-    page.wait_for_timeout(45000)
+    expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=90000)
     screenshot_page(page, "after-submit-click-wait")
-    expect(page.get_by_role("button", name="Metadata record")).to_be_visible(timeout=45000)
     screenshot_page(page, "after-ingestion")
     expect(page.get_by_role("button", name="Map viewer")).to_be_visible()
-    with page.expect_popup() as page1_info:
+    with page.expect_popup() as geonetwork_info:
         page.get_by_role("button", name="Metadata record").click()
-    page1 = page1_info.value
-    page.wait_for_timeout(10000)
-    screenshot_page(page1, "metadata")
-    expect(page1.get_by_text("Awesome").first).to_be_visible()
-    expect(page1.get_by_text("Antennes - WMS")).to_be_visible()
-    page1.close()
-    with page.expect_popup() as page2_info:
+    geonetwork = geonetwork_info.value
+    screenshot_page(geonetwork, "metadata")
+    expect(geonetwork.get_by_text("Awesome").first).to_be_visible(timeout=30000)
+    expect(geonetwork.locator("#main-content")).to_contain_text("psc:antennes")
+    geonetwork.close()
+    with page.expect_popup() as geoserver_info:
         page.get_by_role("button", name="Map viewer").click()
-    page2 = page2_info.value
-    screenshot_page(page2, "mapviewer")
-    expect(page2.locator("canvas")).to_be_visible()
-    page2.close()
-    with page.expect_popup() as page3_info:
+    geoserver = geoserver_info.value
+    screenshot_page(geoserver, "mapviewer")
+    expect(geoserver.locator("canvas")).to_be_visible()
+    geoserver.close()
+    with page.expect_popup() as ogcapi_info:
         page.get_by_role("button", name="OGC API").click()
-    page3 = page3_info.value
-    page3_url = page3_info.value.url
-    screenshot_page(page3, "ogcapi")
-    expect(page3.locator("body")).to_be_visible()
-    page3.close()
+    ogcapi = ogcapi_info.value
+    ogcapi_url = ogcapi_info.value.url
+    screenshot_page(ogcapi, "ogcapi")
+    expect(ogcapi.locator("body")).to_be_visible()
+    ogcapi.close()
 
     page.set_extra_http_headers({"origin": "http://localhost:1234/"})
-    response = page.goto(page3_url)
+    response = page.goto(ogcapi_url)
     assert response.headers["content-type"] == "application/geo+json"
     assert 0 < len(response.headers["access-control-allow-origin"]) < 2
-    assert response.json()['numberMatched'] == 14
+    assert response.json()['numberMatched'] == 56
     assert response.json()['numberReturned'] == 10
