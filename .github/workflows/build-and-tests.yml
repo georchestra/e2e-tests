@@ -63,6 +63,9 @@ jobs:
               docker compose cp  ../tests/init/psc geoserver:/mnt/geoserver_datadir/workspaces/psc
               docker compose restart geoserver
               echo "Geoserver layer added and restarted"
+              docker build -t static:latest ../tests/resources/html 
+              docker run -d -p 3000:3000 static:latest
+              echo "Static server started"
           else
               docker compose logs
               exit 1
@@ -86,7 +89,7 @@ jobs:
         run: |
           cd ./tests 
           pwd 
-          pytest tests --tracing=on --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 -v --slowmo=200
+          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 -v --slowmo=200
           cd ..
 
       - name: Load test report history
