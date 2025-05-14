@@ -15,17 +15,17 @@ class TestEmbedded:
     @allure.description("This test attempts import a metatadata.")
     def test_import_metadata(self, page: Page):
         login(page)
-        # page.goto("/geonetwork")
-        # page.wait_for_timeout(5000)
-        # page.get_by_role("button", name=" Contribute").click()
-        # page.get_by_role("menuitem", name=" Import new records", exact=True).get_by_role("link").click()
-        # page.get_by_label("Upload a file from URL").check()
-        # page.get_by_placeholder("http://").fill("https://www.geo2france.fr/geonetwork/srv/api/records/35d867a1-9420-449c-b0c4-442e7662eca6/formatters/xml")
-        # page.get_by_text("Overwrite metadata with same UUID").click()
-        # page.get_by_text("Publish").click()
-        # page.get_by_role("button", name="+   Import").click()
-        # page.get_by_role("link", name="").click()
-        # screenshot_page(page, "import-metadata")
+        page.goto("/geonetwork")
+        page.wait_for_timeout(5000)
+        page.get_by_role("button", name=" Contribute").click()
+        page.get_by_role("menuitem", name=" Import new records", exact=True).get_by_role("link").click()
+        page.get_by_label("Upload a file from URL").check()
+        page.get_by_placeholder("http://").fill("https://www.geo2france.fr/geonetwork/srv/api/records/35d867a1-9420-449c-b0c4-442e7662eca6/formatters/xml")
+        page.get_by_text("Overwrite metadata with same UUID").click()
+        page.get_by_text("Publish").click()
+        page.get_by_role("button", name="+   Import").click()
+        page.get_by_role("link", name="").click()
+        screenshot_page(page, "import-metadata")
         TestEmbedded.metadata_imported = True
 
 
