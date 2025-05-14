@@ -135,6 +135,7 @@ def test_roles_and_delegations(page: Page):
 @allure.feature("User creation")
 @allure.description("This test attempts to create the John Doe user by an admin.")
 @pytest.mark.skipif(condition=ConfigurationManager.write_tests_disabled(), reason="Write tests are disabled")
+@pytest.mark.flaky(reruns=0)
 def test_create_user_by_admin(page: Page):
     login(page)
     page.goto("/console/manager/home")

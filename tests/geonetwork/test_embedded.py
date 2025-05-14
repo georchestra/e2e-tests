@@ -24,8 +24,10 @@ class TestEmbedded:
         page.get_by_text("Overwrite metadata with same UUID").click()
         page.get_by_text("Publish").click()
         page.get_by_role("button", name="+   Import").click()
-        page.get_by_role("link", name="").click(timeout=60000)
-        screenshot_page(page, "import-metadata")
+        expect(page.get_by_text("Metadata imported from URL")).to_be_visible(timeout=60000)
+        expect(page.locator("#gn-import-reports-row")).to_contain_text("Metadata imported from URL with UUID '35d867a1-9420-449c-b0c4-442e7662eca6'")
+        page.goto("/geonetwork/srv/eng/catalog.search#/metadata/35d867a1-9420-449c-b0c4-442e7662eca6")
+        screenshot_page(page, "imported-metadata")
         TestEmbedded.metadata_imported = True
 
 
