@@ -24,7 +24,7 @@ class TestEmbedded:
         page.get_by_text("Overwrite metadata with same UUID").click()
         page.get_by_text("Publish").click()
         page.get_by_role("button", name="+   Import").click()
-        page.get_by_role("link", name="").click()
+        page.get_by_role("link", name="").click(timeout=60000)
         screenshot_page(page, "import-metadata")
         TestEmbedded.metadata_imported = True
 

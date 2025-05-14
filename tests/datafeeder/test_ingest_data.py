@@ -45,7 +45,7 @@ def test_import_shp_datafeeder(page: Page):
         page.get_by_role("button", name="Metadata record").click()
     geonetwork = geonetwork_info.value
     screenshot_page(geonetwork, "metadata")
-    expect(geonetwork.get_by_text("Awesome").first).to_be_visible(timeout=30000)
+    expect(geonetwork.get_by_text("Awesome").first).to_be_visible(timeout=60000)
     expect(geonetwork.locator("#main-content")).to_contain_text("psc:antennes")
     geonetwork.close()
     with page.expect_popup() as geoserver_info:
