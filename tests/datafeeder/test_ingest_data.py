@@ -41,6 +41,7 @@ def test_import_shp_datafeeder(page: Page):
         page.wait_for_timeout(10000)
         if page.get_by_role("button", name="Metadata record").is_visible(timeout=5000):
             break
+        screenshot_page(page, "after-submit-" + str(i))
         page.reload()
     screenshot_page(page, "after-submit-click")
     expect(page.get_by_role("button", name="Metadata record")).to_be_visible()
