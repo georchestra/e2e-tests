@@ -93,7 +93,7 @@ jobs:
           cd ..
 
       - name: Load test report history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         continue-on-error: true
         if: always()
         with:
