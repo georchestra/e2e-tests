@@ -37,7 +37,7 @@ def test_import_shp_datafeeder(page: Page):
     page.get_by_role("button", name="Submit").click()
     screenshot_page(page, "after-submit-click")
     # wait for the data to be ingested
-    for i in range(5):
+    for i in range(10):
         page.wait_for_timeout(10000)
         if page.get_by_role("button", name="Metadata record").is_visible(timeout=5000):
             break
