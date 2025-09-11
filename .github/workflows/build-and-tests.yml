@@ -1,7 +1,7 @@
 name: Execute tests on georchestra/docker:master
 on:
   push:
-    branches: [ main, master ]
+    branches: [ k3s ]
   pull_request:
     branches: [ main, master ]
   schedule:
@@ -17,9 +17,23 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: tests
-      - name: Add hosts to /etc/hosts
-        run: |
-          sudo echo "127.0.0.1 georchestra-127-0-0-1.nip.io" | sudo tee -a /etc/hosts
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # this might remove tools that are actually needed,
+          # if set to "true" but frees about 6 GB
+          tool-cache: true
+          # all of these default to true, but feel free to set to
+          # "false" if necessary for your workflow
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: false
+
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -44,32 +58,30 @@ jobs:
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
 
-      - name: Checkout geOrchestra/docker
-        uses: actions/checkout@v4
-        with:
-          repository: georchestra/docker
-          submodules: 'recursive'
-          ref: 'master'
-          path: 'docker'
+      - name: Helm Installation
+        uses: azure/setup-helm@v4
 
-      - name: Launch docker-compose
+      - name: Launch k3s
         run: |
-          cd docker
-          if docker compose up -d --wait --quiet-pull ; then
-              echo "docker compose succeedeed"
-              docker compose cp ../tests/init/dump.sql postgis:/dump.sql
-              docker compose exec -it postgis psql -U georchestra -d datafeeder -f /dump.sql 
-              echo "Table armoires created in datafeeder db, schema psc"
-              docker compose cp  ../tests/init/psc geoserver:/mnt/geoserver_datadir/workspaces/psc
-              docker compose restart geoserver
-              echo "Geoserver layer added and restarted"
-              docker build -t static:latest ../tests/resources/html 
-              docker run -d -p 3000:3000 static:latest
-              echo "Static server started"
-          else
-              docker compose logs
-              exit 1
-          fi
+          curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -
+          sudo dd if=/dev/zero of=/swapfile bs=1M count=8k status=progress
+          sudo chmod 0600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+          export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+          until kubectl get --raw='/readyz?verbose'; do echo "wait for k3s to finish"; done
+          helm install --wait --timeout=15m georchestra oci://ghcr.io/georchestra/helm-charts/georchestra
+          kubectl wait --for=condition=ready --timeout=15m deployment/georchestra-geonetwork
+          echo "k3s up succeedeed"
+          kubectl cp ../tests/init/dump.sql georchestra-database-0:/dump.sql
+          kubectl exec -it georchestra-database-0 psql -U georchestra -d datafeeder -f /dump.sql 
+          kubectl cp  ../tests/init/psc georchestra-geoserver:/mnt/geoserver_datadir/workspaces/psc
+          kubectl cp ../tests/init/psc $(kubectl get pod  -l app.kubernetes.io/component=georchestra-geoserver -o jsonpath='{.items[0].metadata.name}'):/mnt/geoserver_datadir/workspaces/psc
+          kubectl rollout restart deployment georchestra-geoserver
+          docker build -t static:latest ../tests/resources/html 
+          docker run -d -p 3000:3000 static:latest
+          echo "Static server started"
           cd ../tests
           echo "Insert metadata in GN..."
           python init/insert_metadata.py
@@ -77,19 +89,12 @@ jobs:
           cd ..
           echo "Trigger GN wro4j..."
           curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
-        
-
-      - name: Caddy trust
-        run: |
-          wget -q "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
-          chmod +x caddy
-          ./caddy trust
 
       - name: Run your tests
         run: |
           cd ./tests 
           pwd 
-          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 -v --slowmo=200
+          pytest tests --tracing=retain-on-failure --alluredir=allure-results --base-url=https://georchestra-127-0-0-1.nip.io --reruns=1 -v --slowmo=200 --ver
           cd ..
 
       - name: Load test report history
