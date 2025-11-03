@@ -154,6 +154,7 @@ def test_create_user_by_admin(page: Page):
     screenshot_page(page, "user-creation")
     expect(page.get_by_role("heading", name="All users / Doe John")).to_be_visible()
     screenshot_page(page, "user-creation-by-admin")
+    page.wait_for_timeout(1500)
     page.get_by_role("link", name="Dashboard").click()
     page.reload()
     expect(page.get_by_role("cell", name="John Doe").first).to_be_visible()
