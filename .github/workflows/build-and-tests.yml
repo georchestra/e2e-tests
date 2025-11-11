@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo echo "127.0.0.1 georchestra-127-0-0-1.nip.io" | sudo tee -a /etc/hosts
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
 
