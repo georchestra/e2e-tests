@@ -29,6 +29,12 @@ jobs:
           docker-images: true
           swap-storage: false
 
+      - name: "Logging in docker.io"
+        uses: azure/docker-login@v2
+        with:
+          username: '${{ secrets.DOCKER_HUB_USERNAME }}'
+          password: '${{ secrets.DOCKER_HUB_PASSWORD }}'
+
       - uses: actions/checkout@v6
         with:
           path: tests
@@ -92,13 +98,6 @@ jobs:
           cd ..
           echo "Trigger GN wro4j..."
           curl -k https://georchestra-127-0-0-1.nip.io/geonetwork/srv/eng/catalog.search 
-        
-
-      - name: Caddy trust
-        run: |
-          wget -q "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
-          chmod +x caddy
-          ./caddy trust
 
       - name: Run your tests
         run: |
@@ -110,21 +109,18 @@ jobs:
       - name: Load test report history
         uses: actions/checkout@v6
         continue-on-error: true
-        if: always()
         with:
           ref: gh-pages
           path: gh-pages
 
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.13
-        if: always()
         with:
           allure_results: tests/allure-results
           keep_reports: 5
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
-        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
