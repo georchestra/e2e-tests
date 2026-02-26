@@ -114,11 +114,22 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.13
+      - name: Set up Node.js for Allure CLI
+        uses: actions/setup-node@v4
         with:
-          allure_results: tests/allure-results
-          keep_reports: 5
+          node-version: '20'
+
+      - name: Install Allure CLI
+        run: |
+          npm install -g allure-commandline
+          allure --version
+
+      - name: Build test report
+        run: |
+          if [ -d gh-pages/history ]; then
+            cp -r gh-pages/history tests/allure-results/
+          fi
+          allure generate tests/allure-results -o allure-history --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
