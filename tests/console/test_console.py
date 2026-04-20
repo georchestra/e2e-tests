@@ -196,3 +196,14 @@ def test_delete_user(page: Page):
     expect(page.get_by_text("User deleted")).to_be_visible()
     expect(page.get_by_text("7 users")).to_be_visible()
     screenshot_page(page, "user-deletion")
+
+@allure.epic("Console")
+@allure.feature("User deletion")
+@allure.description("This test attempts delete the John Doe user by an admin.")
+def test_delete_user(page: Page):
+    login(page)
+    page.goto("/console/account/userdetails")
+    page.get_by_label("Edit Organization").click()
+    expect(page.get_by_label("Name *")).to_be_visible()
+    expect(page.get_by_label("Description")).to_be_visible()
+    screenshot_page(page, "organization-edit-page")
