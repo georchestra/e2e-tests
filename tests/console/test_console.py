@@ -199,7 +199,7 @@ def test_delete_user(page: Page):
 
 @allure.epic("Console")
 @allure.feature("User deletion")
-@allure.description("This test attempts delete the John Doe user by an admin.")
+@allure.description("This test attempts to check page of organization edition.")
 def test_delete_user(page: Page):
     login(page)
     page.goto("/console/account/userdetails")
