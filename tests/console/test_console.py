@@ -198,9 +198,9 @@ def test_delete_user(page: Page):
     screenshot_page(page, "user-deletion")
 
 @allure.epic("Console")
-@allure.feature("User deletion")
+@allure.feature("Organization edit page")
 @allure.description("This test attempts to check page of organization edition.")
-def test_delete_user(page: Page):
+def test_check_org_page(page: Page):
     login(page)
     page.goto("/console/account/userdetails")
     page.get_by_label("Edit Organization").click()
