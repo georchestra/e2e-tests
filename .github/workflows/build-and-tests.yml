@@ -115,7 +115,7 @@ jobs:
           path: gh-pages
 
       - name: Set up Node.js for Allure CLI
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
 
