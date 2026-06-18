@@ -35,7 +35,7 @@ jobs:
           username: '${{ secrets.DOCKER_HUB_USERNAME }}'
           password: '${{ secrets.DOCKER_HUB_PASSWORD }}'
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           path: tests
       - name: Add hosts to /etc/hosts
@@ -46,7 +46,7 @@ jobs:
         with:
           python-version: '3.14'
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: camptocamp/python-geonetwork
           path: geonetworkapi
@@ -66,7 +66,7 @@ jobs:
         run: python -m playwright install --with-deps
 
       - name: Checkout geOrchestra/docker
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: georchestra/docker
           submodules: 'recursive'
@@ -108,7 +108,7 @@ jobs:
           cd ..
 
       - name: Load test report history
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         continue-on-error: true
         with:
           ref: gh-pages
